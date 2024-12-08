@@ -16,8 +16,20 @@ public class QueryController {
     PromptService promptService;
 
     @PostMapping()
-    public List<QueryResponse> getResponse(@RequestBody QueryInput input){
+    public List<QueryResponse> getResponse(@RequestBody QueryInput input) {
         return promptService.getResponse(input.getInput());
     }
+
+    @PostMapping("/riddles")
+    public String getRiddles(@RequestBody QueryInput input) {
+        return promptService.generateRiddles(input.getInput());
+    }
+
+    @PostMapping("/jiras")
+    public String getJiras(@RequestBody QueryInput input){
+        return promptService.getAllJiras(input.getInput());
+    }
+
+
 
 }

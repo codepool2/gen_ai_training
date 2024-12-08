@@ -1,6 +1,7 @@
 package com.epam.training.gen.ai.configuration;
 
 import com.azure.ai.openai.OpenAIAsyncClient;
+import com.epam.training.gen.ai.client.JiraLifeCyclePlugin;
 import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.aiservices.openai.chatcompletion.OpenAIChatCompletion;
 import com.microsoft.semantickernel.orchestration.InvocationContext;
@@ -8,9 +9,9 @@ import com.microsoft.semantickernel.orchestration.InvocationReturnMode;
 import com.microsoft.semantickernel.orchestration.PromptExecutionSettings;
 import com.microsoft.semantickernel.orchestration.ToolCallBehavior;
 import com.microsoft.semantickernel.plugin.KernelPlugin;
+import com.microsoft.semantickernel.plugin.KernelPluginFactory;
 import com.microsoft.semantickernel.services.chatcompletion.ChatCompletionService;
 import com.microsoft.semantickernel.services.chatcompletion.ChatHistory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -44,10 +45,22 @@ public class SemanticKernelConfiguration {
     }
 
     @Bean
-    public Kernel kernel(ChatCompletionService chatCompletionService) {
+    public Kernel kernel(ChatCompletionService chatCompletionService, KernelPlugin jiraLifeCycleKernelPlugin) {
         return Kernel.builder()
+                .withPlugin(jiraLifeCycleKernelPlugin)
                 .withAIService(ChatCompletionService.class, chatCompletionService)
                 .build();
+    }
+
+    @Bean
+    public KernelPlugin jiraLifeCycleKernelPlugin(JiraLifeCyclePlugin jiraLifeCyclePlugin) {
+        return KernelPluginFactory.createFromObject(jiraLifeCyclePlugin, "jiraLifeCyclePlugin");
+    }
+
+
+    @Bean
+    public JiraLifeCyclePlugin jiraLifeCyclePlugin(){
+        return new JiraLifeCyclePlugin();
     }
 
 
