@@ -41,9 +41,9 @@ public class BabyBuddyService {
         StringBuilder response = new StringBuilder();
         for (ChatMessageContent<?> result : queryResponse) {
             chatHistory.addMessage(result);
-
-            if(result.getAuthorRole() == AuthorRole.ASSISTANT){
-                System.out.println("Riddle Solving Assistant Result: "+result);
+            System.out.println("Our Input: " + input);
+            if (result.getAuthorRole() == AuthorRole.ASSISTANT) {
+                System.out.println("Riddle Solving Assistant Result: " + result);
             }
             response.append(result);
         }
