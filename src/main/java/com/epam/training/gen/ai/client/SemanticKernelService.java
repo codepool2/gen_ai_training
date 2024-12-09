@@ -4,13 +4,13 @@ import com.epam.training.gen.ai.model.QueryResponse;
 import com.google.gson.Gson;
 import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.orchestration.InvocationContext;
-import com.microsoft.semantickernel.orchestration.responseformat.JsonObjectResponseFormat;
 import com.microsoft.semantickernel.services.chatcompletion.ChatCompletionService;
 import com.microsoft.semantickernel.services.chatcompletion.ChatHistory;
 import com.microsoft.semantickernel.services.chatcompletion.ChatMessageContent;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -18,9 +18,9 @@ public class SemanticKernelService {
 
   private final ChatCompletionService chatCompletionService;
   private final InvocationContext invocationContext;
-  private final ChatHistory chatHistory;
   private final Kernel kernel;
   private final Gson gson;
+  private final ChatHistory chatHistory;
 
   public SemanticKernelService(
           ChatCompletionService chatCompletionService,
@@ -29,10 +29,11 @@ public class SemanticKernelService {
           Kernel kernel) {
     this.chatCompletionService = chatCompletionService;
     this.invocationContext = invocationContext;
-    this.chatHistory = chatHistory;
+    this.chatHistory = new ChatHistory();
     this.kernel = kernel;
     this.gson = new Gson();
   }
+
 
   public List<QueryResponse> getResponse(String query) {
 
@@ -66,4 +67,16 @@ public class SemanticKernelService {
 
     return responses;
   }
+
+
+  public String getAllJirasWithSpecificStatus(String input){
+   chatHistory.addUserMessage(input);
+    List<ChatMessageContent<?>> queryResponse =
+            chatCompletionService
+                    .getChatMessageContentsAsync(chatHistory, kernel, invocationContext)
+                    .block();
+    return String.valueOf(queryResponse.get(0));
+  }
+
+
 }
