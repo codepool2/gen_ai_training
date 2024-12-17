@@ -1,5 +1,6 @@
 package com.epam.training.gen.ai.controller;
 
+import com.epam.training.gen.ai.model.AiModel;
 import com.epam.training.gen.ai.model.QueryInput;
 import com.epam.training.gen.ai.model.QueryResponse;
 import com.epam.training.gen.ai.prompt.PromptService;
@@ -15,9 +16,14 @@ public class QueryController {
     @Autowired
     PromptService promptService;
 
-    @PostMapping()
+    @PostMapping("/openAi")
     public List<QueryResponse> getResponse(@RequestBody QueryInput input){
-        return promptService.getResponse(input.getInput());
+        return promptService.getResponse(input.getInput(), AiModel.OPEN_AI);
+    }
+
+    @PostMapping("/amazon")
+    public List<QueryResponse> getResponseFromAmazon(@RequestBody QueryInput input){
+        return promptService.getResponse(input.getInput(), AiModel.AMAZON);
     }
 
 }
