@@ -1,13 +1,12 @@
 package com.epam.training.gen.ai.controller;
 
-import com.epam.training.gen.ai.model.AiModel;
-import com.epam.training.gen.ai.model.QueryInput;
-import com.epam.training.gen.ai.model.QueryResponse;
+import com.epam.training.gen.ai.model.*;
 import com.epam.training.gen.ai.prompt.PromptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/chat")
@@ -24,6 +23,11 @@ public class QueryController {
     @PostMapping("/amazon")
     public List<QueryResponse> getResponseFromAmazon(@RequestBody QueryInput input){
         return promptService.getResponse(input.getInput(), AiModel.AMAZON);
+    }
+
+    @PostMapping("/jiraPlugin")
+    public String getJiraDashBoards(@RequestBody QueryInput input){
+        return promptService.getJiraDashboard(input.getInput(), AiModel.OPEN_AI);
     }
 
 }

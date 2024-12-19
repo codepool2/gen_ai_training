@@ -26,4 +26,5 @@ public class AiClientServiceProvider {
         }
         throw new IllegalArgumentException();
     }
+
 }
