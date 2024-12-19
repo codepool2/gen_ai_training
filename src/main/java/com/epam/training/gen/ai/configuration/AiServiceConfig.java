@@ -1,5 +1,6 @@
 package com.epam.training.gen.ai.configuration;
 
+import com.epam.training.gen.ai.client.AiClientServiceProvider;
 import com.epam.training.gen.ai.client.SemanticKernelService;
 import com.epam.training.gen.ai.prompt.PromptService;
 import com.microsoft.semantickernel.Kernel;
@@ -10,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class GenAiServiceConfig {
+public class AiServiceConfig {
 
     @Bean
     public PromptService promptService(SemanticKernelService semanticKernelService) {
@@ -18,13 +19,10 @@ public class GenAiServiceConfig {
     }
 
     @Bean
-    public SemanticKernelService semanticKernelService(ChatCompletionService chatCompletionService,
-                                                       InvocationContext invocationContext,
-                                                       ChatHistory chatHistory,
-                                                       Kernel kernel
+    public SemanticKernelService semanticKernelService(AiClientServiceProvider aiClientServiceProvider
 
     ) {
-        return new SemanticKernelService(chatCompletionService, invocationContext, chatHistory, kernel);
+        return new SemanticKernelService(aiClientServiceProvider);
     }
 
 }
