@@ -63,11 +63,36 @@
             <version>${sk.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.microsoft.semantic-kernel/semantickernel-bom -->
+
+
+        <dependency>
+            <groupId>com.microsoft.semantic-kernel</groupId>
+            <artifactId>semantickernel-experimental</artifactId>
+            <version>${sk.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.microsoft.semantic-kernel</groupId>
             <artifactId>semantickernel-data-jdbc</artifactId>
             <version>${sk.version}</version>
         </dependency>
+
+
+<!--        <dependency>-->
+<!--            <groupId>com.microsoft.semantic-kernel</groupId>-->
+<!--            <artifactId>semantickernel-connectors-ai-openai</artifactId>-->
+<!--            <version>${sk.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.microsoft.semantic-kernel.extensions</groupId>-->
+<!--            <artifactId>semantickernel-sequentialplanner-extension</artifactId>-->
+<!--            <version>${sk.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.microsoft.semantic-kernel.extensions</groupId>-->
+<!--            <artifactId>semantickernel-actionplanner-extension</artifactId>-->
+<!--            <version>${sk.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -88,12 +113,14 @@
         </dependency>
 
 
+
+
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
-
         </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 

@@ -1,7 +1,6 @@
 package com.epam.training.gen.ai.configuration;
 
-import com.epam.training.gen.ai.repository.MovieRecommendationRepositoryImpl;
-import com.epam.training.gen.ai.spi.MovieRecommendationRepository;
+import com.epam.training.gen.ai.repository.KnowledgeRepository;
 import com.microsoft.semantickernel.aiservices.openai.textembedding.OpenAITextEmbeddingGenerationService;
 import com.microsoft.semantickernel.data.jdbc.JDBCVectorStore;
 import com.microsoft.semantickernel.data.jdbc.JDBCVectorStoreOptions;
@@ -33,9 +32,10 @@ public class PostGresDbConfig {
                 .build();
     }
 
+
     @Bean
-    public MovieRecommendationRepository movieRecommendationRepository(JDBCVectorStore jdbcVectorStore,
-                                                                       OpenAITextEmbeddingGenerationService openAITextEmbeddingGenerationService) {
-        return new MovieRecommendationRepositoryImpl(jdbcVectorStore, openAITextEmbeddingGenerationService);
+    public KnowledgeRepository knowledgeRepository(JDBCVectorStore jdbcVectorStore,
+                                                   OpenAITextEmbeddingGenerationService openAITextEmbeddingGenerationService) {
+        return new KnowledgeRepository(jdbcVectorStore, openAITextEmbeddingGenerationService);
     }
 }
