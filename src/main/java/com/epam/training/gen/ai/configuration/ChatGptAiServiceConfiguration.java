@@ -7,6 +7,7 @@ import com.epam.training.gen.ai.spi.AiClient;
 import com.google.gson.Gson;
 import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.aiservices.openai.chatcompletion.OpenAIChatCompletion;
+import com.microsoft.semantickernel.aiservices.openai.textembedding.OpenAITextEmbeddingGenerationService;
 import com.microsoft.semantickernel.orchestration.InvocationContext;
 import com.microsoft.semantickernel.services.chatcompletion.ChatCompletionService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,5 +34,16 @@ public class ChatGptAiServiceConfiguration {
     ) {
         return new OpenAiClient(openAiCompletionService, kernel, gson, invocationContext);
     }
+
+
+    @Bean
+    public OpenAITextEmbeddingGenerationService openAITextEmbeddingGenerationService(OpenAIAsyncClient openAIAsyncClient) {
+        return OpenAITextEmbeddingGenerationService.builder()
+                        .withOpenAIAsyncClient(openAIAsyncClient)
+                        .withModelId("text-embedding-ada-002")
+                        .build();
+
+    }
+
 
 }
