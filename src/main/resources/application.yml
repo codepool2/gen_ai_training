@@ -1,5 +1,12 @@
 client:
-  openai:
-    key: ${EPAM_DIAL_API_KEY}
-    endpoint: https://ai-proxy.lab.epam.com
-    deploymentName: gpt-35-turbo
+  key:
+  endpoint: https://ai-proxy.lab.epam.com
+  models:
+    openAi: gpt-35-turbo
+    amazon: Mixtral-8x7B-Instruct-v0.1
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sk
+    username: postgres
+    password: postgres
